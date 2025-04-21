@@ -1,3 +1,5 @@
+import re
+
 adwentures_of_tom_sawer = """\
 Tom gave up the brush with reluctance in his .... face but alacrity
 in his heart. And while
@@ -40,7 +42,6 @@ print(adwentures_of_tom_sawer)
 """ Зробіть так, щоб у тексті було не більше одного пробілу між словами.
 """
 print("Task 3")
-import re
 adwentures_list = re.split(r'\s+', adwentures_of_tom_sawer)
 adwentures_of_tom_sawer = ' '.join(adwentures_list)
 print(adwentures_of_tom_sawer)
@@ -70,13 +71,23 @@ print(f'У тексті {count} слів починається з Велико�
 """ Виведіть позицію, на якій слово Tom зустрічається вдруге
 """
 print("Task 6")
+# WAY 1. Added some improwment (case where search word is only shown once in the text
 search_word = 'Tom'
-if adwentures_of_tom_sawer.find(search_word) != -1:
-    first_index = adwentures_of_tom_sawer.find(search_word)
+first_index = adwentures_of_tom_sawer.find(search_word)
+second_index = adwentures_of_tom_sawer.find(search_word, first_index + 1)
+
+if (first_index != -1) and (second_index != -1):
     print(f'The word "{search_word}" occurs for the second time on {adwentures_of_tom_sawer.find(search_word, first_index + 1)} position.')
-else:
+if (first_index != -1) and (second_index == -1):
+    print(f'Word "{search_word}" is in text only once.')
+if first_index == -1:
     print(f'Word "{search_word}" is not found in the text.')
 
+# WAY 2. The easiest way for this case
+# search_word = 'Tom'
+# first_index = adwentures_of_tom_sawer.find(search_word)
+# search_index = adwentures_of_tom_sawer.find(search_word, first_index + 1)
+# print(f'The word "{search_word}" occurs for the second time on {search_index} position.')
 
 # task 07
 """ Розділіть змінну adwentures_of_tom_sawer по кінцю речення.
