@@ -42,7 +42,9 @@ print(adwentures_of_tom_sawer)
 """ Зробіть так, щоб у тексті було не більше одного пробілу між словами.
 """
 print("Task 3")
-adwentures_list = re.split(r'\s+', adwentures_of_tom_sawer)
+# using re and \s+
+# adwentures_list = re.split(r'\s+', adwentures_of_tom_sawer)
+adwentures_list = adwentures_of_tom_sawer.split()
 adwentures_of_tom_sawer = ' '.join(adwentures_list)
 print(adwentures_of_tom_sawer)
 
