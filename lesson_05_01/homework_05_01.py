@@ -47,7 +47,7 @@ car_data = {
 search_criteria = (2017, 1.6, 36000)
 
 def search_criteria_cars(search_criteria):
-    return[[car, car_data] for car, car_data in car_data.items()
+    return [[car, car_data] for car, car_data in car_data.items()
            if car_data[1] >= search_criteria[0] and car_data[2] >= search_criteria[1] and car_data[4] <= search_criteria[2]]
 
 filtred = search_criteria_cars(search_criteria)
