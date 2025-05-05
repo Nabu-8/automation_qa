@@ -30,8 +30,7 @@ multiplication_table(3)
 """  Написати функцію, яка обчислює суму двох чисел.
 """
 def add_two(a, b):
-    added = a + b
-    return added
+    return a + b
 
 print(f'Сума чисел дорівнює {add_two(3, 5)}.')
 
