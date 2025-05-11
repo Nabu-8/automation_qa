@@ -10,10 +10,11 @@ def sum_el_array(array):
     for string in array:
         string_parts = string.split(',')
         try:
-            numbers = [int(part) for part in string_parts]
-            summ_numbers.append(sum(numbers))
+            res = sum([int(part) for part in string_parts])
         except ValueError:
-            summ_numbers.append('"Не можу це зробити"')
+            res = '"Не можу це зробити"'
+        finally:
+            summ_numbers.append(res)
     return summ_numbers
 
 array = ["1,2,3,4", "1,2,3,4,50", "qwerty1,2,3"]
