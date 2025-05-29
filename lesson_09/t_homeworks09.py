@@ -26,7 +26,7 @@ class TestHomeworkFiveFunctions(unittest.TestCase):
         self.assertEqual(expected_result, actual_result)
 
 
-class TestHomeworkightFunctions(unittest.TestCase):
+class TestHomeworkEightFunctions(unittest.TestCase):
 
     def test_sum_el_array_with_value_error(self):
         actual_result = sum_el_array(array_with_value_error)
