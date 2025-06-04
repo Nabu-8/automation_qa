@@ -34,7 +34,7 @@ for row in combined:
         row[2] = normalize_text(row[2])
         row[3] = normalize_text(row[3])
     if len(row) > 13:
-        row[4] = normalize_date(row[13])
+        row[4] = normalize_date(row[4])
         row[13] = normalize_date(row[13])
     clean_combined.append(row)
 

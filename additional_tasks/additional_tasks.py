@@ -3,9 +3,11 @@
 australia_blacklist = {'Alina', 'Leo', 'Nick', 'Maggie', 'Eric'}
 poker_blacklist = {'Marta', 'Leo', 'Keanu', 'Maggie'}
 alcohol_blacklist = {'Maggie', 'John', 'Leon', 'Amy', 'Leo'}
-if australia_blacklist & poker_blacklist & alcohol_blacklist:
-    for name in australia_blacklist & poker_blacklist & alcohol_blacklist:
-        print(f'The winner is {name}!')
+#if australia_blacklist & poker_blacklist & alcohol_blacklist: #це if не потрібен насправді: якзо у тебе нема
+# спільних елементів, то у тебе буде for k in set(): тобто по порожньому сету і цей блок просто буде пропущейний
+# без помилок
+for name in australia_blacklist & poker_blacklist & alcohol_blacklist:
+    print(f'The winner is {name}!')
 else:
     print(f'This time there is no winner!')
 
@@ -26,13 +28,16 @@ for key, value in dictionary.items():
 # зустрічаеться кожна буква)
 # Тобто кожну букву та скільки разів вона зустрічаеться
 user_input = 'My name is Emmy Santiago'
-dict = {}
+word_counter = {}
 for letter in user_input:
-    if letter in dict:
-        dict[letter] += 1
-    else:
-        dict[letter] = 1
-print(dict)
+    word_counter[letter] = word_counter.get('letter', 0) + 1
+
+    # теж саме що і це:
+    # if letter in dict:
+    #     dict[letter] += 1
+    # else:
+    #     dict[letter] = 1
+print(word_counter)
 
 # 4
 # Вирішити задачу 3 без словника за 2 строки:
