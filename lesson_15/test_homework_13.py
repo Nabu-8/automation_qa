@@ -27,3 +27,12 @@ def test_my_rhombus_invalid(side_a, angle_a, expected_exception, expected_messag
     with pytest.raises(expected_exception) as excinfo:
         Rhombus(side_a,angle_a)
     assert expected_message in str(excinfo.value)
+
+
+@pytest.mark.hw13
+@pytest.mark.negative
+def test_my_rhombus_invalid_angle_b():
+    r = Rhombus(10, 120)
+    with pytest.raises(AttributeError) as excinfo:
+        setattr(r, 'angle_b', 120)
+    assert "You cannot choose angle_b. It's value is calculated automatically via angle_a" in str(excinfo.value)

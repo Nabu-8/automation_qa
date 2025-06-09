@@ -20,6 +20,9 @@ class Rhombus:
             super().__setattr__('angle_a', value)
             super().__setattr__('angle_b', 180 - value)
 
+        elif key == 'angle_b':
+            raise AttributeError("You cannot choose angle_b. It's value is calculated automatically via angle_a")
+
         else:
             super().__setattr__(key, value)
 
@@ -27,5 +30,9 @@ class Rhombus:
         return f'Rhombus data: Side A - {self.side_a}, Angle A - {self.angle_a} degrees, Angle B - {self.angle_b} degrees.'
 
 
-# my_rhombus = Rhombus(10, 10)
-# print(my_rhombus)
+# r = my_rhombus = Rhombus(10, 50)
+# print(r)
+# r.angle_a = 120
+# print(r)
+# r.angle_b = 120
+# print(r)
