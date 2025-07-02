@@ -13,12 +13,15 @@ def even_count_to_number_including_it(n):
 
 counter = even_count_to_number_including_it(10)
 
-try:
-    while True:
-        print(next(counter))
-except StopIteration:
-    print("Completed")
-
+# V1
+# try:
+#     while True:
+#         print(next(counter))
+# except StopIteration:
+#     print("Completed")
+# v2
+for k in even_count_to_number_including_it(10):
+    print(k)
 
 # Створіть генератор, який генерує послідовність Фібоначчі до певного числа N.
 def fibonacci_generator_to_n_including_it(n):
