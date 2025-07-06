@@ -12,14 +12,14 @@ def extract_monitoring_signals_analys_time():
     try:
         with open('hblog.txt', 'r', encoding='utf-8') as file:
             lines = file.readlines()
-            filtered_log = []
-            for line in lines:
-                if "Key TSTFEED0300|7E3E|0400" in line:
-                    index = line.find("Timestamp ")
-                    if index != -1:
-                        time = line[index + len("Timestamp "):index + len("Timestamp ") + 8]
-                        filtered_log.append(time)
-            return [datetime.strptime(log, "%H:%M:%S") for log in filtered_log]
+        filtered_log = []
+        for line in lines:
+            if "Key TSTFEED0300|7E3E|0400" in line:
+                index = line.find("Timestamp ")
+                if index != -1:
+                    time = line[index + len("Timestamp "):index + len("Timestamp ") + 8]
+                    filtered_log.append(time)
+        return [datetime.strptime(log, "%H:%M:%S") for log in filtered_log]
 
     except Exception as e:
         return f"Error: {e}"
