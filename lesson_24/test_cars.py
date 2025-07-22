@@ -27,18 +27,20 @@ class TestCarSearch:
         if "sort_by" in query_params and query_params["sort_by"] == "":
             logger.warning(f"Empty 'sort_by' passed in params={query_params}")
 
-        response, data = self.send_request(auth_session, query_params)
+        response, data = RequestHelper.send_request(auth_session, query_params)
 
         if params.get("sort_by") == "nonexistent_field":
-            self.check_status_code(response, 400, query_params)
+            AssertionHelper.check_status_code(response, 400, query_params)
         else:
-            self.check_status_code(response, 200, query_params)
-            self.check_schema(data)
-            self.limit_check(data, params.get('limit'), total_cars_count)
+            AssertionHelper.check_status_code(response, 200, query_params)
+            AssertionHelper.check_schema(data)
+            AssertionHelper.limit_check(data, params.get('limit'), total_cars_count)
 
             sort_key = params.get('sort_by')
             if sort_key and data and sort_key in data[0]:
                 validate_sorting(data, sort_key=sort_key)
+
+class RequestHelper:
 
     @staticmethod
     def send_request(session, params):
@@ -51,6 +53,8 @@ class TestCarSearch:
             logger.warning(f"Error while JSON parse: {e}")
             data = None
         return response, data
+
+class AssertionHelper:
 
     @staticmethod
     def check_status_code(response, expected_code, params):
