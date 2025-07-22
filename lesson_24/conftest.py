@@ -16,7 +16,7 @@ def auth_session():
 
 @pytest.fixture(scope="class")
 def total_cars_count(auth_session):
-    response = auth_session.get(f"{BASE_URL}/cars")
+    response = auth_session.get(f"{BASE_URL}/cars", params={"limit": 1000})
     response.raise_for_status()
     data = response.json()
     return len(data)
