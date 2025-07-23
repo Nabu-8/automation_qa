@@ -30,6 +30,13 @@ class TestCarSearch:
         response, data = RequestHelper.send_request(auth_session, query_params)
 
         if params.get("sort_by") == "nonexistent_field":
+            # це яскравий сигнал того, що це треба рознести на різні тест кейси
+            # Якщо дивитись на якийсь реальний кейс, то я б зробив один з 2х шляхів:
+            # Якщо е не баг, то яб просто розніс на 2 тести і прибрав би ей if
+            # Якщо це баг, то я б або
+            # закоментував це в test_case і лишив би коммент: #TODO: uncomment after fixing JIRA-123
+            # лишив би if але pytest.skip(reason="JIRA-123")
+            pytest.skip(reason="JIRA-123: Server does not return 400 for invalid sort_by field")
             AssertionHelper.check_status_code(response, 400, query_params)
         else:
             AssertionHelper.check_status_code(response, 200, query_params)
