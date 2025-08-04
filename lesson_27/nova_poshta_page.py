@@ -1,4 +1,5 @@
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
 from .base_page import BasePage
 from .locators import Locators
 
@@ -14,9 +15,9 @@ class NovaPoshtaTrackingPage(BasePage):
 
     def get_status_text(self):
         try:
-            return self.get_text(self.locators.status_text_loc)
+            return self.wait.until(EC.visibility_of_element_located(self.locators.status_text_loc)).text
         except TimeoutException:
             try:
-                return self.get_text(self.locators.error_text_loc)
+                return self.wait.until(EC.visibility_of_element_located(self.locators.error_text_loc)).text
             except TimeoutException:
                 return "Status is not found"
