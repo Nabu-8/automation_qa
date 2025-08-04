@@ -1,0 +1,23 @@
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions as EC
+from .base_page import BasePage
+from .locators import Locators
+
+class NovaPoshtaTrackingPage(BasePage):
+
+    def __init__(self, driver, url="https://tracking.novaposhta.ua/#/uk"):
+        super().__init__(driver, url)
+        self.locators = Locators
+
+    def enter_tracking_number(self, ttn):
+        self.input_text(self.locators.input_field_loc, ttn)
+        self.click(self.locators.submit_button_loc)
+
+    def get_status_text(self):
+        try:
+            return self.wait.until(EC.visibility_of_element_located(self.locators.status_text_loc)).text
+        except TimeoutException:
+            try:
+                return self.wait.until(EC.visibility_of_element_located(self.locators.error_text_loc)).text
+            except TimeoutException:
+                return "Status is not found"
