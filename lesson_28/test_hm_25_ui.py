@@ -10,6 +10,7 @@ from lesson_28.users_data import valid_data, invalid_data, base_valid, random_em
 def test_valid_sign_up(sign_up_page, name, last, email, password, repeat):
     if len(last) > 21:
         pytest.skip(reason="JIRA-123: last name exceeds 21 characters")
+
     sign_up_page.open_sign_up_modal()
     sign_up_page.fill_form(name, last, email, password, repeat)
     sign_up_page.submit_form()
@@ -43,17 +44,7 @@ def test_invalid_data_validation(sign_up_page, data, expected_error):
     sign_up_page.open_sign_up_modal()
     sign_up_page.fill_form(**all_data)
 
-    if "last" in data:
-        sign_up_page.blur_field(sign_up_page.locators.last_name_input_loc)
-    elif "name" in data:
-        sign_up_page.blur_field(sign_up_page.locators.name_input_loc)
-        WebDriverWait(sign_up_page._driver, 5).until(EC.text_to_be_present_in_element(Locators.error_text_loc, expected_error))
-    elif "email" in data:
-        sign_up_page.blur_field(sign_up_page.locators.email_input_loc)
-    elif "password" in data:
-        sign_up_page.blur_field(sign_up_page.locators.password_field_loc)
-    elif "repeat" in data:
-        sign_up_page.blur_field(sign_up_page.locators.repeat_password_field_loc)
+    sign_up_page.blur_field_and_wait_if_needed(data, expected_error)
 
     if sign_up_page.is_register_button_enabled():
         sign_up_page.submit_form()

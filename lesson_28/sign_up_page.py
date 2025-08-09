@@ -86,3 +86,23 @@ class SignUpPage(BasePage):
 
         body = self._driver.find_element(By.TAG_NAME, "body")
         body.click()
+
+    def blur_field_and_wait_if_needed(self, data: dict, expected_error=None, timeout=5):
+        """Блюрит нужное поле и ждёт ошибку, если надо"""
+        if "last" in data:
+            self.blur_field(self.locators.last_name_input_loc)
+        elif "name" in data:
+            self.blur_field(self.locators.name_input_loc)
+            if expected_error:
+                WebDriverWait(self._driver, timeout).until(
+                    EC.text_to_be_present_in_element(
+                        self.locators.error_text_loc,
+                        expected_error
+                    )
+                )
+        elif "email" in data:
+            self.blur_field(self.locators.email_input_loc)
+        elif "password" in data:
+            self.blur_field(self.locators.password_field_loc)
+        elif "repeat" in data:
+            self.blur_field(self.locators.repeat_password_field_loc)
