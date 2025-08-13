@@ -1,28 +1,35 @@
-import requests
 import pytest
+import allure
 from lesson_28.users_data import random_email
-from lesson_28.utils import build_signup_payload
+from lesson_28.api_helpers import (
+    send_signup_request,
+    validate_successful_response,
+    validate_existing_user_response
+)
 
-url = "https://qauto2.forstudy.space/api/auth/signup"
-
+@allure.suite("HW25 API Tests")
+@allure.epic("Sign Up Modal")
+@allure.feature("API Tests")
 @pytest.mark.hw25()
-@pytest.mark.positive
-@pytest.mark.api
-def test_successful_registration_api():
-    payload = build_signup_payload(random_email())
-    response = requests.post(url, json=payload)
+class TestSignUpAPI:
 
-    assert response.status_code == 201, f"Expected 201, got {response.status_code}, response: {response.text}"
-    json_data = response.json()
-    assert json_data["status"] == "ok"
+    @allure.title("Successful user registration via API")
+    @allure.story("Successful registration")
+    @pytest.mark.positive
+    @pytest.mark.api
+    def test_successful_registration_api(self):
+        email = random_email()
+        response = send_signup_request(email)
+        validate_successful_response(response)
 
-@pytest.mark.hw25()
-@pytest.mark.negative
-@pytest.mark.api
-def test_user_already_exists_api(registered_user_email):
-    payload = build_signup_payload(registered_user_email)
-    response = requests.post(url, json=payload)
+    @allure.title("Registration attempt with already registered email")
+    @allure.story("Registration with existing user")
+    @pytest.mark.negative
+    @pytest.mark.api
+    def test_user_already_exists_api(self, registered_user_email):
+        response = send_signup_request(registered_user_email)
+        validate_existing_user_response(response)
 
-    assert response.status_code == 400
-    assert response.json()["status"] == "error"
-    assert response.json()["message"] == "User already exists"
+# ri allure-results -r -fo
+# pytest -m hw25 --alluredir=allure-results
+# allure serve allure-results
