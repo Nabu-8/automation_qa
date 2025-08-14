@@ -7,7 +7,10 @@ from lesson_28.sign_up_page import SignUpPage
 
 @pytest.fixture
 def driver():
-    driver = webdriver.Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless=new")
+
+    driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
 
