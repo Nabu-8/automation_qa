@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Nabu-8/automation_qa.git'
+                git branch: '/homework28', url: 'https://github.com/Nabu-8/automation_qa.git'
             }
         }
         stage('Install dependencies') {
