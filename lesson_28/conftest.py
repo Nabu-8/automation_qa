@@ -1,3 +1,4 @@
+import tempfile
 import pytest
 import requests
 from selenium import webdriver
@@ -9,7 +10,8 @@ from lesson_28.sign_up_page import SignUpPage
 def driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
-    options.add_argument("--user-data-dir=/tmp/unique_profile")
+    temp_dir = tempfile.mkdtemp(prefix="chrome_profile_")
+    options.add_argument(f"--user-data-dir={temp_dir}")
 
     driver = webdriver.Chrome(options=options)
     yield driver
