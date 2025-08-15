@@ -13,12 +13,8 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
     rm google-chrome-stable_current_amd64.deb
 
 RUN CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+') && \
-    DRIVER_URL=$(curl -s https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json \
-        | grep -A 10 "\"$CHROME_VERSION\"" \
-        | grep "linux64" \
-        | grep -oP 'https.*chromedriver-linux64.zip' \
-        | head -n 1) && \
-    wget -O /tmp/chromedriver.zip "$DRIVER_URL" && \
+    CHROMEDRIVER_VERSION=$(curl -s "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_$CHROME_VERSION") && \
+    wget -O /tmp/chromedriver.zip "https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip" && \
     unzip /tmp/chromedriver.zip -d /tmp/ && \
     mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
     chmod +x /usr/local/bin/chromedriver && \
