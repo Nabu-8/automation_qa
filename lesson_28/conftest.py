@@ -9,6 +9,7 @@ from lesson_28.sign_up_page import SignUpPage
 def driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless=new")
+    options.add_argument("--user-data-dir=/tmp/unique_profile")
 
     driver = webdriver.Chrome(options=options)
     yield driver
