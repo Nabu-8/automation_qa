@@ -9,11 +9,12 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
     apt install -y ./google-chrome-stable_current_amd64.deb && \
     rm google-chrome-stable_current_amd64.deb
 
-RUN CHROMEDRIVER_VERSION=124.0.6367.91 && \
-    wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip && \
-    unzip /tmp/chromedriver.zip -d /usr/local/bin && \
+RUN wget -O /tmp/chromedriver-linux64.zip \
+     https://storage.googleapis.com/chrome-for-testing-public/139.0.7258.68/linux64/chromedriver-linux64.zip && \
+    unzip /tmp/chromedriver-linux64.zip -d /tmp/ && \
+    mv /tmp/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
     chmod +x /usr/local/bin/chromedriver && \
-    rm /tmp/chromedriver.zip
+    rm -rf /tmp/chromedriver-linux64*
 
 ENV PATH="/usr/local/bin:$PATH"
 
