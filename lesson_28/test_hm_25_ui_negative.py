@@ -7,6 +7,7 @@ from lesson_28.users_data import invalid_data, base_valid, random_email
 @allure.epic("Sign Up Modal")
 @allure.feature("UI Tests")
 @pytest.mark.hw25()
+@pytest.mark.ui_test
 @pytest.mark.negative
 class TestSignUpUINegative:
 
@@ -45,7 +46,6 @@ class TestSignUpUINegative:
 
     @allure.title("Visual check of invalid input field class")
     @allure.story("Invalid input class check")
-    @pytest.mark.negative
     @pytest.mark.parametrize("locator", [
         Locators.name_input_loc,
         Locators.last_name_input_loc,

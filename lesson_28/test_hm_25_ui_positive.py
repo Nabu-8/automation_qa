@@ -6,6 +6,7 @@ from lesson_28.users_data import valid_data
 @allure.epic("Sign Up Modal")
 @allure.feature("UI Tests")
 @pytest.mark.hw25()
+@pytest.mark.ui_test
 @pytest.mark.positive
 class TestSignUpUIPositive:
 
