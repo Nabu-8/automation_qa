@@ -7,11 +7,11 @@ from lesson_28.users_data import invalid_data, base_valid, random_email
 @allure.epic("Sign Up Modal")
 @allure.feature("UI Tests")
 @pytest.mark.hw25()
+@pytest.mark.negative
 class TestSignUpUINegative:
 
     @allure.title("Registration attempt with already existing user")
     @allure.story("Registration with existing user")
-    @pytest.mark.negative
     def test_user_already_exists(self, sign_up_page, registered_user_email):
         sign_up_page.open_sign_up_modal()
         sign_up_page.fill_form("Test", "User", registered_user_email, "Pass1234", "Pass1234")
@@ -22,7 +22,6 @@ class TestSignUpUINegative:
 
     @allure.title("Registration with invalid form data")
     @allure.story("Invalid registration")
-    @pytest.mark.negative
     @pytest.mark.parametrize("data, expected_error", invalid_data)
     def test_invalid_data_validation(self, sign_up_page, data, expected_error):
         all_data = {**base_valid, **data}
