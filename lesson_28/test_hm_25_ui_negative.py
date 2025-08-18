@@ -8,6 +8,7 @@ from lesson_28.users_data import invalid_data, base_valid, random_email
 @allure.feature("UI Tests")
 @pytest.mark.hw25()
 @pytest.mark.negative
+@pytest.mark.ui_test
 class TestSignUpUINegative:
 
     @allure.title("Registration attempt with already existing user")

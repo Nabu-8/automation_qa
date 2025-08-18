@@ -7,6 +7,7 @@ from lesson_28.users_data import valid_data
 @allure.feature("UI Tests")
 @pytest.mark.hw25()
 @pytest.mark.positive
+@pytest.mark.ui_test
 class TestSignUpUIPositive:
 
     @allure.title("Successful registration with valid data")
