@@ -1,0 +1,19 @@
+# docker-compose.yaml
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+      - 50000:50000
+    privileged: true
+    user: root
+    container_name: jenkins
+    volumes:
+      - ~/jenkins_compose/jenkins_configuration:/var/jenkins_home
+      - ~/jenkins_compose/docker.sock:/var/run/docker.sock
+
+# docker compose -f jenkins-docker.yaml up
+#docker compose -f jenkins-docker.yaml build --no-cache
+#docker compose -f jenkins-docker.yaml up -d
